@@ -123,7 +123,15 @@ def register_view(request):
             user = User(name=name, email=email, password=hash_password)
             user.save()
 
-            return JsonResponse({"valid": "true"})
+            # Log the new user in
+            user = authenticate(request, email=email, password=password)
+
+            if user is not None:
+                login(request, user)
+                return JsonResponse({"valid": "true"})
+
+            else:
+                return JsonResponse({"valid": "false"})
 
     else:
         return render(request, "register.html")
