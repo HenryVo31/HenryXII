@@ -27,7 +27,8 @@ SECRET_KEY = '3w^#t5@ktm1m^u3=5((!f-_w$*c)no6hb(2w9jp4xef%7-d$7n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['henryxii.herokuapp.com']
+ALLOWED_HOSTS = ['henryxii.herokuapp.com',
+                 '127.0.0.1']
 
 # Clear browser's session when it closes
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True

@@ -110,7 +110,7 @@ def register_view(request):
 
     if request.method == "POST":
 
-        username = request.POST["username"]
+        name = request.POST["name"]
         email = request.POST["email"]
         password = request.POST["password"]
 
@@ -120,7 +120,7 @@ def register_view(request):
 
         else:
             hash_password = make_password(password)
-            user = User(username=username, email=email, password=hash_password)
+            user = User(name=name, email=email, password=hash_password)
             user.save()
 
             return JsonResponse({"valid": "true"})
