@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	Henry XII | Orders
+{% endblock %}
+
+{% block body %}
+	<div class="orders_outermost_div">
+		<!-- Title !-->
+		<div class="orders_title_div">
+			<div class="orders_title_innerdiv">
+				<span>Your Orders</span>
+			</div>
+		</div>
+
+		<!-- Main Body !-->
+		<div class="orders_main_body_div">
+			{% if empty == "no" %}
+				<div class="customer_info_div">
+					<header class="customer_info_header">Customer Information</header>
+					<p><span class="customer_info_name">Name: </span>{{ order_info.name }}</p>
+					<p><span class="customer_info_phone">Phone: </span>{{ order_info.phone_number }}</p>
+					<p><span class="customer_info_address">Address: </span>{{ order_info.street_address }}</p>
+					<p><span class="customer_info_notes">Notes: </span>{{ order_info.notes }}</p>
+				</div>
+
+				<div class="orders_details_div">
+					<header class="orders_details_header">Order Details</header>
+					<p><span class="orders_details_order_number">Order #: </span>{{ order_info.id }}</p>
+				</div>
+
+				<div class="orders_info_div">
+					<table>
+						<tr class="orders_table_headers">
+							<td class="orders_table_description">
+								Description
+							</td>
+							<td class="orders_table_price">
+								Price
+							</td>
+						</tr>
+
+						{% for item in order_items %}
+							<tr class="orders_items_row">
+								<td class="orders_items">
+									<div>
+										<p class="orders_items_name">{{ item.name }}</p>
+										{% if item.size != "none" %}
+											<p class="orders_items_description">{{ item.size }}</p>
+										{% endif %}
+										{% if item.topping == "All" %}
+											{% for topping in order_toppings %}
+												{% if item.id == topping.item_id %}
+													<p class="orders_items_toppings">
+														<i class="far fa-plus-square"></i>{{ topping.name }}
+													</p>
+												{% endif %}
+											{% endfor %}
+										{% endif %}
+									</div>
+								</td>
+
+								<td class="orders_price">
+									<p class="orders_price_value">$ {{ item.price }}</p>
+								</td>
+							</tr>
+						{% endfor %}
+					</table>
+				</div>
+
+				<div class="orders_total_div">
+					<p><span class="orders_total_header">Total: </span>$ {{ order_info.total_price }}</p>
+				</div>
+
+			{% elif empty == "yes" %}
+				<div class="no_orders_div"><div>No orders placed yet</div></div>
+
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

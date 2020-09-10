@@ -1,0 +1,100 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	Henry XII | Homepage
+{% endblock %}
+
+{% block body %}
+	<!-- Outer wrapper !-->
+	<div class="homepage-wrapper">
+
+		<!-- Intro !-->
+		<div class="homepage-intro-div">
+			<img class="home-main-logo" src="static/img/main-logo.png">
+		</div>
+		<!-- End intro !-->
+
+
+		<!-- Special pizza !-->
+		<div class="homepage-special-div">
+			<div class="homepage-special-body">
+				<div class="homepage-special-body-overlay">
+					<div class="homepage-special-body-inner-overlay">
+						<header>
+							Conquistatore
+						</header>
+
+						<p>
+							The magnificent blue cheese combined with the exquisite balsamic chicken makes the Conquistatore, the greatest pizza in the world.
+						</p>
+
+						<div class="home-special-body-button">
+							<a href="{% url 'menu' %}">
+								Go to Menu
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="homepage-special-image">
+				<img src="static/img/home-special-pizza.jpg">
+			</div>
+		</div>
+		<!-- End Special pizza !-->
+
+
+		<!-- Exclusive wine !-->
+		<div class="homepage-wine-div">
+			<div class="homepage-wine-image">
+				<img src="static/img/home-wine.jpg">
+			</div>
+
+			<div class="homepage-wine-body">
+				<div class="home-wine-inner-body">
+					<header>
+						Penfolds Grange 1951
+					</header>
+
+					<p>
+						A luxurious, savory taste that galvanizes even the hardest of sommeliers. The Penfolds
+						Grange 1951, is one of the most expensive wines in the world.
+					</p>
+
+					<div class="homepage-wine-button">
+						<a href="{% url 'menu' %}">
+							Go to Menu
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Exclusive wine !-->
+
+
+		<!-- Order now !-->
+		<div class="homepage-order-div">
+			<div class="homepage-order-overlay">
+				<a href="{% url 'menu' %}">
+					<div class="homepage-order-inner-overlay">
+						<header>
+							Order now
+						</header>
+
+						<p>
+							With over 50 different amazing items on the menu, and a speed 5 minutes delivery time, 
+							what are you waiting for?
+						</p>
+
+						<span>
+							Let's start
+						</span>
+					</div>
+				</a>
+			</div>
+		</div>
+		<!-- End Order now !-->
+
+	</div>
+	<!-- End Outer wrapper !-->
+{% endblock %}

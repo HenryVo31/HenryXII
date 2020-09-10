@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+ <html>
+ 	<head>
+ 		<link rel="stylesheet" type="text/css" href="/static/stylesheet.css">
+ 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+ 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+
+ 		{% block script %}{% endblock %}
+
+ 		<title>
+ 			{% block title %}{% endblock %}
+ 		</title>
+
+ 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 	</head>
+
+ 	<body>
+ 		<!-- Nav bar !-->
+ 		<div class="nav-bar-outerdiv">
+ 			<div class="nav-bar-list-div">
+ 				<ul class="nav-bar-list">
+ 					<a href="{% url 'menu' %}"><li>Menu</li></a>
+
+ 					<a class="orders_button" href="{% url 'orders' %}"><li>Orders</li></a>
+
+ 					{% if not request.user.is_authenticated %}
+	 					<a href="{% url 'login' %}">
+	 						<i class="fas fa-sign-in-alt" id="nav-user-icon"></i>
+	 						<li class="nav-list-item-signin">Sign In</li>
+	 					</a> <br>
+
+	 					<a href="{% url 'register' %}">
+	 						<i class="fas fa-user-circle" id="nav-user-icon"></i>
+	 						<li class="nav-list-item-register">Register</li>
+	 					</a>
+
+	 				{% elif request.user.is_authenticated %}
+	 					<a href="{% url 'logout' %}">
+	 						<i class="fas fa-sign-out-alt" id="nav-user-icon"></i>
+	 						<li class="nav-list-item-signout">Sign Out</li>
+	 					</a>
+	 				{% endif %}
+ 				</ul>
+ 			</div>
+ 		</div>
+
+ 		<div class="nav-bar-icon-div">
+ 			<i class="fas fa-bars" id="nav-bar-icon-open" onclick="open_navbar()"></i>
+ 			<i class="fas fa-times" id="nav-bar-icon-close" onclick="close_navbar()"></i>
+ 			
+ 			<a href="{% url 'index' %}"><img class="nav-bar-logo" src="/static/img/main-logo.png"></a>
+ 		</div>
+ 		<!-- End Nav bar !-->
+
+ 		{% block body %}{% endblock %}
+
+ 		<!-- Javascript !-->
+ 		{% load static %}
+ 		<script type="text/javascript" src="{% static 'js/layout.js' %}"></script>
+ 		<!-- End Javascript !-->
+ 	</body>
+ </html>
+ 

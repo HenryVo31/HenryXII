@@ -1,0 +1,365 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	Henry XII | Menu
+{% endblock %}
+
+{% load replace_underscore %}
+
+{% block body %}
+
+	<!-- Navigation menu !-->
+	<div class="menu-navigation-div">
+		<div class="menu-navigation-innerdiv">
+			<ul>
+				{% for category in categories %}
+					{% if forloop.first %}
+						<div class="menu-navigation-item">
+							<a href="#!" class="menu-item-nav-button menu-navigation-item-active">
+								<li class="menu-item-name">{{ category }}</li>
+							</a>
+						</div>
+
+					{% else %}
+						<div class="menu-navigation-item">
+							<a href="#!" class="menu-item-nav-button">
+								<li class="menu-item-name">{{ category }}</li>
+							</a>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+	<!-- End Navigation menu !-->
+
+
+	<!-- Order panel !-->
+	<div class="menu-order-panel">
+		<div class="menu-order-panel-div">
+			<div class="menu-order-closing-div">
+				<div class="menu-order-closing-innerdiv">
+					<i class="fas fa-chevron-left" id="menu-order-arrow-open" onclick="open_order_panel()"></i>
+					<i class="fas fa-chevron-right" id="menu-order-arrow-close" onclick="close_order_panel()"></i>
+				</div>
+			</div>
+
+			<div class="menu-order-panel-innerdiv">
+				<header>
+					Your Orders
+				</header>
+
+				<div class="menu-order-table-div">
+					<table id="menu-order-table">
+					</table>
+				</div>
+
+				<div class="menu-checkout-div">
+					<div class="menu-order-total">
+						<span>TOTAL: $ </span><span id="menu-order-total-value">0</span>
+					</div>
+
+					<div class="menu-checkout-button-div">
+						<button class="menu-checkout-button">
+							Checkout
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Order panel !-->
+
+	<!-- Checkout overlay !-->
+	<div class="checkout-overlay-outerdiv">
+		<div class="delivery-overlay-div">
+			<div class="delivery-overlay-title">
+				DELIVERY DETAILS
+			</div>
+
+			<div class="delivery-overlay-details">
+				<div class="delivery-overlay-error-div">
+					<p class="delivery-overlay-error-message">
+						Please fill in all of the required fields
+					</p>
+				</div>
+
+				<div class="delivery-overlay-details-street">
+					<header>
+						Street address
+					</header>
+					<input type="text" class="delivery-overlay-input" id="customer_street_address">
+				</div>
+
+				<div class="delivery-overlay-details-location">
+					<div class="delivery-overlay-details-location-city">
+						<header>
+							City
+						</header>
+						<input type="text" class="delivery-overlay-input" id="customer_city">
+					</div>
+
+					<div class="delivery-overlay-details-location-country">
+						<header>
+							Country
+						</header>
+						<input type="text" class="delivery-overlay-input" id="customer_country">
+					</div>
+				</div>
+
+				<div class="delivery-overlay-details-phone-number">
+					<header>
+						Phone number
+					</header>
+					<input type="text" class="delivery-overlay-input" id="customer_phone_number">
+				</div>
+
+				<div class="delivery-overlay-details-notes">
+					<header>
+						Notes
+					</header>
+					<textarea rows="4" cols="50" id="customer_notes"></textarea>
+				</div>
+
+				<div class="delivery-overlay-btn-outerdiv">
+					<div class="delivery-overlay-closing-btn-div">
+						<button class="delivery-overlay-closing-btn">
+							<i class="fas fa-caret-left"></i> <span>Back</span>
+						</button>
+					</div>
+
+					<div class="delivery-overlay-continue-btn-div">
+						<button class="delivery-overlay-continue-btn">
+							<span>Continue</span> <i class="fas fa-caret-right"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="order_error_div">
+			<div class="order_error_exit_div">
+				<a class="order_error_exit"><i class="fas fa-times"></i></a>
+			</div>
+
+			<div class="order_error_innerdiv">
+				<p>Please wait until your current order is completed, before placing a new one.</p>
+				<a href="{% url 'orders' %}">Your Order</a>
+			</div>
+		</div>
+
+		<div class="payment-methods-overlay-div">
+			<div class="payment-methods-overlay-title">
+				PAYMENT METHODS
+			</div>
+
+			<div class="payment-methods-overlay-innerdiv">
+				<a class="payment-methods-cash-btn">
+					<div class="payment-methods-cash-div">
+						<i class="fas fa-money-bill-wave"></i> <br>
+						<p>CASH ON DELIVERY</p>
+					</div>
+				</a>
+
+				<a class="payment-methods-creditcard-btn">
+					<div class="payment-methods-creditcard-div">
+						<i class="fas fa-credit-card"></i>
+						<p>CREDIT CARD</p>
+					</div>
+				</a>
+			</div>
+
+			<div class="payment-methods-btn-outerdiv">
+				<div class="payment-methods-closing-btn-div">
+					<button class="payment-methods-closing-btn">
+						<i class="fas fa-caret-left"></i> <span>Back</span>
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="payment-info-overlay-div">
+			<div class="payment-info-overlay-title">
+				PAYMENT INFORMATION
+			</div>
+
+			<div class="payment-info-overlay-grid-div">
+				<div class="payment-info-overlay-innerdiv">
+					<div class="payment_info_overlay_error_div">
+						<p class="payment_info_overlay_error_message">
+							Please fill in all of the fields
+						</p>
+					</div>
+
+					<header>
+						Card Holder Name
+					</header>
+					<input type="text" class="payment_info_value">
+
+					<header>
+						Card Number
+					</header>
+					<input type="text" class="payment_info_value">
+
+					<header>
+						Expiry Date
+					</header>
+					<input type="date" class="payment_info_value">
+
+					<header>
+						CVV
+					</header>
+					<input type="text" class="payment_info_value">
+
+					<div class="payment-info-btn-outerdiv">
+						<div class="payment-info-closing-btn-div">
+							<button class="payment-info-closing-btn">
+								<i class="fas fa-caret-left"></i> <span>Back</span>
+							</button>
+						</div>
+
+						<div class="payment-info-confirm-btn-div">
+							<button class="payment-info-confirm-btn">
+								<span>Confirm</span> <i class="fas fa-caret-right"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="payment-info-image-div">
+					<img src="/static/img/credit-card-image.jpg">
+				</div>
+			</div>		
+		</div>
+	</div>
+	<!-- End Checkout overlay !-->
+
+	<!-- Main menu !-->
+	<div class="menu-wrapper">
+
+		{% for items, prices, category in main_list %}
+
+			<div class="menu-outer-div">
+				<div class="menu-category" style="background-image: url('{{ category.image.url }}');" id="{{ category }}">
+					<header>
+						{{ category }}
+					</header>
+				</div>
+
+			{% for item in items %}{% for price in prices %}
+
+				{% if forloop.counter == forloop.parentloop.counter %}
+
+				<div class="menu-item-outer-div">
+					<div class="menu-item-inner-div">
+						<div class="menu-item-image">
+							<img src="{{ item.image.url }}">
+						</div>
+
+						<div class="menu-item-body">
+							<header class="menu-item-body-head">{{ item.name }}</header>
+
+							<p>
+								{{ item.description }}
+							</p>
+
+							<div class="price">
+								$ <span>{{ price }}</span>
+							</div>
+
+							{% if item.size == "all" or item.topping == "all" %}
+							<div class="menu-choice-div">
+
+								{% if item.size == "all" %}
+								<div class="menu-choice-size">
+									<select name="choice_size" class="choice-size">
+										<option value="small">Small</option>
+										<option value="large">Large</option>
+									</select>
+								</div>
+								{% endif %}
+
+								{% if item.topping == "all" %}
+								<div class="menu-choice-topping">
+									<select name="choice_topping" class="choice-topping">
+										<option value="no_topping">No topping(s)</option>
+										<option value="one_topping">1 topping(s)</option>
+										<option value="two_topping">2 topping(s)</option>
+										<option value="three_topping">3 topping(s)</option>
+										<option value="special_topping">Special topping(s)</option>
+									</select>
+								</div>
+								{% endif %}
+
+							</div>
+							{% endif %}
+
+							<div class="menu-add-to-order-div">
+								<button class="add_to_order_btn">
+									Add to order
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				{% endif %}
+			{% endfor %}{% endfor %}
+			</div>
+		{% endfor %}
+	</div>
+	<!-- End Main menu !-->
+
+	<!-- Choose toppings overlay !-->
+	<div class="menu-toppings-overlay">
+		<div class="menu-toppings-overlay-outerdiv">
+			<div class="menu-toppings-overlay-innerdiv">
+
+				<header>Choose Toppings</header>
+
+				{% for normal_topping in toppings_normal %}
+				<label class="toppings_container">
+					<input type="checkbox" class="topping_choice_checkbox">
+					<span class="custom_checkbox"></span>
+					<div class="toppings_label">{{ normal_topping }}</div>
+				</label>
+				{% endfor %}
+
+				{% for special_topping in toppings_special %}
+				<label class="toppings_container">
+					<input type="checkbox" class="topping_choice_checkbox">
+					<span class="custom_checkbox"></span>
+					<div class="toppings_label_special">{{ special_topping }}</div>
+					<div class="special_topping_star"><i class="fas fa-star"></i></div>
+				</label> <br>
+				{% endfor %}
+
+				<div class="topping_overlay_error_div">
+					<p class="topping_overlay_error_message">Error</p>
+				</div>
+
+				<div class="topping_buttons_outer_div">
+					<div class="topping_closing_button_div">
+						<button class="topping_overlay_closing_button">
+							<i class="fas fa-caret-left"></i> <span>Back</span>
+						</button>
+					</div>
+
+					<div class="topping_button_div">
+						<button class="topping_overlay_button">
+							<span>Continue</span> <i class="fas fa-caret-right"></i>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- End Choose topping overlay !-->
+
+
+	<!-- Javascript !-->
+	{% load static %}
+	<script type="text/javascript" src="{% static 'js/csrf.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/menu.js' %}"></script>
+	<!-- End Javascript !-->
+{% endblock %}
+

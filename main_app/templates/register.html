@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	Henry XII | Register
+{% endblock %}
+
+{% block body %}
+	<div class="register_outermost_div">
+		<div>
+			<!-- Page's title !-->
+			<div class="register_title_div">
+				<header>
+					CREATE AN ACCOUNT
+				</header>
+			</div>
+			<!-- End page's title !-->
+
+			<!-- Error message box !-->
+			<div class="register_error_message_div">
+				<p id="register_error_message_content">Please fill in all of the fields</p>
+			</div>
+			<!-- End Error message box !-->
+
+			<!-- Main body !-->
+			<div class="register_wrapper">
+				<div class="register_innerdiv">
+					<header>
+						Name
+					</header>
+					<input name="name" type="text" id="name">
+
+					<header>
+						Email
+					</header>
+					<input name="email" type="text" id="email">
+
+					<header>
+						Password
+					</header>
+					<input name="password" type="password" placeholder="At least 6 characters" id="password">
+
+					<header>
+						Confirm password
+					</header>
+					<input name="confirm_password" type="password" placeholder="At least 6 characters" id="confirm_password"> <br>
+
+					<div class="register_btn_div">
+						<button class="register_btn">
+							Create account
+						</button>
+					</div>
+
+					<div class="register_loader_div">
+						<div class="register_loader"></div>
+					</div>
+				</div>
+			</div>
+			<!-- End Main body !-->
+		</div>
+	</div>
+
+	<!-- Javascript !-->
+	{% load static %}
+	<script type="text/javascript" src="{% static 'js/register.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/csrf.js' %}"></script>
+	<!-- End Javascript !-->
+{% endblock %}
+

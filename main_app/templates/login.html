@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	Henry XII | Login
+{% endblock %}
+
+{% block body %}
+	<div class="login_outermost_div">
+		<div>
+			<!-- Page's title !-->
+			<div class="login_title_div">
+				<header>
+					SIGN IN
+				</header>
+			</div>
+			<!-- End Page's title !-->
+
+			<!-- Error message panel !-->
+			<div class="login_error_message_div">
+				<p>The email address or password that you have entered is incorrect</p>
+			</div>
+			<!-- End Error message panel !-->
+
+			<!-- Main body !-->
+			<div class="login_wrapper">
+				<div class="login_login_div">
+					<div class="login_login_innerdiv">
+						<header>
+							Email address
+						</header>
+						<input name="email" type="text" placeholder="Enter your email address" id="login_email">
+
+						<header>
+							Password
+						</header>
+						<input name="password" type="password" placeholder="Enter your password" id="login_password">
+
+						<p>
+							<a class="login_forgot_password">
+							</a>
+						</p>
+
+						<div class="login_signin_btn_div">
+							<button class="login_signin_btn">
+								Sign in
+							</button>
+						</div>
+
+						<div class="login_signin_loader_div">
+							<div class="login_signin_loader"></div>
+						</div>
+					</div>
+				</div>
+				
+
+				<div class="login_register_div">
+					<div class="login_register_innerdiv">
+						<p class="login_register_p1">
+							Don't have an account yet?
+						</p>
+
+						<p class="login_register_p2">
+							Create your account to start ordering now.
+						</p>
+
+						<a href="{% url 'register' %}" class="login_register_create_account_btn">
+							Create an account
+						</a>
+					</div>
+				</div>
+			</div>
+			<!-- End Main body !-->
+		</div>
+	</div>
+
+	<!-- Javascript !-->
+	{% load static %}
+	<script type="text/javascript" src="{% static 'js/login.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/csrf.js' %}"></script>
+	<!-- End Javascript !-->
+{% endblock %}
+
