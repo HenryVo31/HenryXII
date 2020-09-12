@@ -2388,13 +2388,14 @@ body
 
 				.delivery-overlay-details-location
 				{
-					display: grid;
-					grid-template-columns: 1fr 1fr;
+					display: flex;
+					flex-direction: column;
 					padding-top: 1rem;
-					padding-bottom: 2rem;
+					padding-bottom: 1rem;
 
 					.delivery-overlay-details-location-city
 					{
+						padding-bottom: 1rem;
 
 						header
 						{
@@ -2447,6 +2448,7 @@ body
 						padding-left: 0.6rem;
 						border-radius: 3px;
 						border: solid 0.5px grey;
+						max-width: 100%;
 					}
 				}
 
@@ -3613,6 +3615,7 @@ body
 			padding-bottom: 1.5rem;
 			border-bottom: 0.5px solid lightgrey;
 			margin-bottom: 1.5rem;
+			margin-left: 1rem;
 
 			.login_login_innerdiv
 			{
@@ -3739,6 +3742,7 @@ body
 		.login_register_div
 		{
 			border-left: 0;
+			margin-left: 1rem;
 
 			.login_register_innerdiv
 			{
